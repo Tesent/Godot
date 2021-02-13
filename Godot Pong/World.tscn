@@ -1,0 +1,180 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://KinematicBody2D.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://RigidBody2D.gd" type="Script" id=3]
+[ext_resource path="res://opponent.gd" type="Script" id=4]
+[ext_resource path="res://World.gd" type="Script" id=5]
+[ext_resource path="res://Button.gd" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.8455, 32.0216 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32.0292, 32.0199 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 42.1133
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 22.5377, 297.95 )
+
+[node name="Kentta" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1023.0
+margin_bottom = 609.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 64.1544, 298.376 )
+scale = Vector2( 0.3, 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Player"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 1 )
+
+[node name="Opponent" type="KinematicBody2D" parent="."]
+light_mask = -2147483647
+position = Vector2( 961.411, 298.376 )
+scale = Vector2( 0.3, 2 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Opponent"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Opponent"]
+shape = SubResource( 1 )
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Wall2" type="StaticBody2D" parent="Walls"]
+position = Vector2( 510.342, 625.39 )
+scale = Vector2( 16, 0.5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall2"]
+modulate = Color( 0, 0, 0, 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
+shape = SubResource( 2 )
+
+[node name="Wall3" type="StaticBody2D" parent="Walls"]
+position = Vector2( 510.342, -16 )
+scale = Vector2( 16, 0.5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall3"]
+modulate = Color( 0, 0, 0, 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall3"]
+shape = SubResource( 2 )
+
+[node name="Ball" type="KinematicBody2D" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+self_modulate = Color( 0.729412, 0, 0, 1 )
+position = Vector2( 510.342, 275.449 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Ball"]
+texture = ExtResource( 2 )
+
+[node name="OikeaSeina" type="Area2D" parent="."]
+position = Vector2( 0, 307.449 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OikeaSeina"]
+position = Vector2( 0, 7.62939e-06 )
+shape = SubResource( 4 )
+
+[node name="VasenSeina" type="Area2D" parent="."]
+position = Vector2( 1022.34, 307.449 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VasenSeina"]
+shape = SubResource( 4 )
+
+[node name="PlayerScore" type="Label" parent="."]
+margin_left = 365.0
+margin_top = 34.0
+margin_right = 405.0
+margin_bottom = 94.0
+rect_scale = Vector2( 1.00776, 1 )
+text = "TEST"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpponentScore" type="Label" parent="."]
+margin_left = 622.0
+margin_top = 34.0
+margin_right = 662.0
+margin_bottom = 94.0
+rect_scale = Vector2( 0.996082, 1 )
+text = "TEST"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VoittoText" type="Label" parent="."]
+visible = false
+margin_left = 50.0
+margin_top = 15.5
+margin_right = 147.0
+margin_bottom = 29.5
+rect_scale = Vector2( 9.64776, 9.59965 )
+size_flags_horizontal = 4
+text = "Player 1 Wins"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+pause_mode = 2
+visible = false
+margin_left = 400.0
+margin_top = 294.505
+margin_right = 497.0
+margin_bottom = 314.505
+rect_scale = Vector2( 2.36964, 4.81188 )
+action_mode = 0
+text = "New game"
+script = ExtResource( 8 )
+[connection signal="body_entered" from="OikeaSeina" to="." method="_on_OikeaSeina_body_entered"]
+[connection signal="body_entered" from="VasenSeina" to="." method="_on_VasenSeina_body_entered"]
